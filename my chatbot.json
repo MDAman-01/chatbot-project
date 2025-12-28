@@ -1,0 +1,363 @@
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.contacts[0].wa_id }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "deff1b24-a657-4671-bbcd-12f91b793081",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "936d4953-8146-4e33-bea1-eb0723d99389",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "NUQZKhZ0OeObODi8",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.messages[0].text.body }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "1ada3f29-72fe-4b0c-8586-fc49047307a4",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1IIsNm88HHLermLNKQaDk-mub9Z_teXw3zQwhFtHFlHk",
+          "mode": "list",
+          "cachedResultName": "Services",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1IIsNm88HHLermLNKQaDk-mub9Z_teXw3zQwhFtHFlHk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1575570290,
+          "mode": "list",
+          "cachedResultName": "Services",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1IIsNm88HHLermLNKQaDk-mub9Z_teXw3zQwhFtHFlHk/edit#gid=1575570290"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        368,
+        208
+      ],
+      "id": "e7b1b055-ef22-47d6-a5e3-0ca2eda10a3a",
+      "name": "Services",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "DBlfr8UNnn1ystkx",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1IIsNm88HHLermLNKQaDk-mub9Z_teXw3zQwhFtHFlHk",
+          "mode": "list",
+          "cachedResultName": "Services",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1IIsNm88HHLermLNKQaDk-mub9Z_teXw3zQwhFtHFlHk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2083842071,
+          "mode": "list",
+          "cachedResultName": "Booking",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1IIsNm88HHLermLNKQaDk-mub9Z_teXw3zQwhFtHFlHk/edit#gid=2083842071"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Customer Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Customer_Name', ``, 'string') }}",
+            "Service": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Service', ``, 'string') }}",
+            "Phone No": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Phone_No', ``, 'string') }}",
+            "Email id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Email_id', ``, 'string') }}",
+            "Status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status', ``, 'string') }}",
+            "Booking Date": "={{ $now.format('yyyy-MM-dd-ss-mm-ss a') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Customer Name",
+              "displayName": "Customer Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Service",
+              "displayName": "Service",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone No",
+              "displayName": "Phone No",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email id",
+              "displayName": "Email id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Booking Date",
+              "displayName": "Booking Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        496,
+        224
+      ],
+      "id": "8ae5d572-6b26-4cee-a68e-eec9205507ac",
+      "name": "Booking",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "DBlfr8UNnn1ystkx",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1IIsNm88HHLermLNKQaDk-mub9Z_teXw3zQwhFtHFlHk",
+          "mode": "list",
+          "cachedResultName": "Services",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1IIsNm88HHLermLNKQaDk-mub9Z_teXw3zQwhFtHFlHk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1505514270,
+          "mode": "list",
+          "cachedResultName": "FAQ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1IIsNm88HHLermLNKQaDk-mub9Z_teXw3zQwhFtHFlHk/edit#gid=1505514270"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        624,
+        192
+      ],
+      "id": "5aeb50cc-2db4-4da4-81e8-3845b83dfb2f",
+      "name": "FAQ",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "DBlfr8UNnn1ystkx",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        0
+      ],
+      "id": "248e006e-aaef-4075-be9f-5779585e0830",
+      "name": "WhatsApp Trigger",
+      "webhookId": "f711fff3-bc6d-4b07-a363-857dd0af5088",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "3RJU9Em5VMreVMqo",
+          "name": "WhatsApp OAuth account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "832622893275133",
+        "recipientPhoneNumber": "917479476055",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        528,
+        0
+      ],
+      "id": "e353ba50-31c5-47b6-bffb-4ea3be5557da",
+      "name": "Send message",
+      "webhookId": "b558a4b7-6450-452c-be23-f29b79df9ff7",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "E3msNgGr4HMMnBC8",
+          "name": "WhatsApp account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Services": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Booking": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FAQ": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "2304769a-813f-4bc2-b4cd-6a75941bb77a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7bc7b9a358a08beaeda202f32955944783562d3121ffdfcad88329708f714068"
+  },
+  "id": "XYOTkrSICdPhPUWo",
+  "tags": []
+}
